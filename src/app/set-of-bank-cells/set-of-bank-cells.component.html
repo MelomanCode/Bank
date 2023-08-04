@@ -1,0 +1,14 @@
+<div
+  class="cells-box"
+  *ngFor="let cellsList of cellsMapByTypes"
+>
+  <div
+    [ngClass]="{
+      'small-cell': cellsList.typeName === 'smallCells',
+      'big-Cell': cellsList.typeName === 'bigCells'
+    }"
+    *ngFor="let item of cellsList.cells"
+  >
+    {{ item.numberOfCell }}
+  </div>
+</div>
