@@ -1,0 +1,7 @@
+<div class="modal-content">
+  <h3 class="title">{{ editableEntity.title }}</h3>
+  <div class="content">
+    <p *ngIf="type === 'smallCells'">{{ editableEntity.textContent }}</p>
+    <p *ngIf="type === 'bigCells'">{{ editableEntity.imageContent }}</p>
+  </div>
+</div>

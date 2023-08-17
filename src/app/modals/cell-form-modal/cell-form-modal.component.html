@@ -1,0 +1,67 @@
+<form [formGroup]="formGroup">
+  <ng-container *ngIf="getIsAccessControl('title')">
+    <div class="mb-3">
+      <label
+        class="form-label"
+        for="title"
+        >Title text
+      </label>
+      <input
+        class="form-control"
+        formControlName="title"
+        id="title"
+        type="text"
+      />
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="getIsAccessControl('imageContent')">
+    <div class="mb-3 flex-control">
+      <div class="image-content">
+        <label
+          class="form-label"
+          for="imageContent"
+          >Image content</label
+        >
+        <input
+          class="form-control"
+          formControlName="imageContent"
+          id="imageContent"
+          type="url"
+        />
+      </div>
+      <div class="preview">
+        <img
+          [alt]="formGroup.get('imageContent')?.value"
+          [src]="formGroup.get('imageContent')?.value"
+          class="preview"
+        />
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="getIsAccessControl('textContent')">
+    <div class="mb-3">
+      <label
+        class="form-label"
+        for="textContent"
+        >Text content</label
+      >
+      <input
+        class="form-control"
+        formControlName="textContent"
+        id="textContent"
+        type="text"
+      />
+    </div>
+  </ng-container>
+
+  <button
+    (click)="submitData()"
+    [disabled]="formGroup.invalid"
+    class="btn btn-primary"
+    type="submit"
+  >
+    Submit
+  </button>
+</form>

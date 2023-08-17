@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title">Enter Key</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="modalRef.dismiss()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <input
+    [(ngModel)]="inputKey"
+    class="form-control"
+    placeholder="Enter key..."
+  />
+  <p
+    *ngIf="keyError"
+    class="text-danger"
+  >
+    Invalid key, please try again.
+  </p>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="modalRef.dismiss()"
+  >
+    Cancel
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="confirmKey()"
+  >
+    OK
+  </button>
+</div>

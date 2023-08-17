@@ -1,0 +1,14 @@
+.modal-content {
+display: flex;
+flex-direction: column;
+}
+
+.content {
+width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
