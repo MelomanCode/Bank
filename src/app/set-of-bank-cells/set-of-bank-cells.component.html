@@ -1,6 +1,6 @@
 <div
   class="cells-box"
-  *ngFor="let cellsList of cellsMapByTypes"
+  *ngFor="let cellsList of cellsMapByTypes$ | async"
 >
   <ng-container *ngFor="let cell of cellsList.cells">
     <app-cell

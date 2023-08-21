@@ -1,8 +1,15 @@
 <div
   [ngClass]="{
-      'small-cell': typeName === 'smallCells',
-      'big-Cell': typeName === 'bigCells'
-    }">
-  {{ cell.numberOfCell }}
+    'small-cell': typeName === 'smallCells',
+    'big-cell': typeName === 'bigCells'
+  }"
+  [ngStyle]="{
+    'border-color': cell.state === 'open' ? '#59f559' : 'red'
+  }"
 
+  (click)="cell.state === 'open' ? openModal() : openKeyModal()"
+
+>
+  {{ cell.numberOfCell }}
 </div>
+

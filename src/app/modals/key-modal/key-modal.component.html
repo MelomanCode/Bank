@@ -4,19 +4,19 @@
     type="button"
     class="close"
     aria-label="Close"
-    (click)="modalRef.dismiss()"
+    (click)="cellsContentService.activeModal.dismiss()"
   >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <input
-    [(ngModel)]="inputKey"
+    [(ngModel)]="cellsContentService.inputKey"
     class="form-control"
     placeholder="Enter key..."
   />
   <p
-    *ngIf="keyError"
+    *ngIf="cellsContentService.keyError"
     class="text-danger"
   >
     Invalid key, please try again.
@@ -26,14 +26,14 @@
   <button
     type="button"
     class="btn btn-secondary"
-    (click)="modalRef.dismiss()"
+    (click)="cellsContentService.activeModal.dismiss()"
   >
     Cancel
   </button>
   <button
     type="button"
     class="btn btn-primary"
-    (click)="confirmKey()"
+    (click)="cellsContentService.confirmKey()"
   >
     OK
   </button>

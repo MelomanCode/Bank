@@ -1,31 +1,43 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { CellInterface, CellType } from '../interfaces/bank-cells.interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {KeyGenerateService} from "../services/key-generate.service";
+import { CellFormModalComponent } from '../modals/cell-form-modal/cell-form-modal.component';
+import { KeyModalComponent } from '../modals/key-modal/key-modal.component';
 
 @Component({
   selector: 'app-cell',
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.css'],
 })
-export class CellComponent {
-  @ViewChild('content') content: any;
-
+export class CellComponent implements OnInit {
   @Input() typeName: CellType = 'smallCells';
   @Input() cell: CellInterface = {};
 
-  public generatedKey: string = '';
+  cellState: 'open' | 'close' = 'open';
 
   constructor(
-    private keyGeneratorService: KeyGenerateService,
     private modalService: NgbModal,
   ) {}
 
-  generateKey() {
-    this.generatedKey = this.keyGeneratorService.generateFormattedRandomKey();
+  ngOnInit() {
   }
 
-  openLg() {
-    this.modalService.open(this.content, { size: 'lg' });
+
+
+  openModal() {
+    const modalRef = this.modalService.open(CellFormModalComponent, {size: 'xl'});
+    modalRef.componentInstance.editableEntity = this.cell;
+    modalRef.result.then(
+      () => {
+      },
+      () => {}
+      ,
+    );
+
+  }
+
+  openKeyModal() {
+    const modalRef = this.modalService.open(KeyModalComponent, {size: 'lg'});
+    modalRef.componentInstance.cellId = this.cell.id;
   }
 }

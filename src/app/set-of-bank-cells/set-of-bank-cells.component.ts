@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { cellTypesMap } from '../constance';
-import {
-  CellInterface,
-  ICellsByType,
-} from '../interfaces/bank-cells.interfaces';
+
+import {CellsContentService} from "../services/cells-content.service";
+import {BehaviorSubject} from "rxjs";
+import {ICell, ICellsByType} from "../interfaces/bank-cells.interfaces";
 
 @Component({
   selector: 'app-set-of-bank-cells',
@@ -11,18 +10,35 @@ import {
   styleUrls: ['./set-of-bank-cells.component.css'],
 })
 export class SetOfBankCellsComponent implements OnInit {
-  public cellsMapByTypes: ICellsByType<CellInterface>[] = [];
+  constructor( private cellsContentService: CellsContentService) {}
+
+  public cellsMapByTypes$ = new BehaviorSubject<ICellsByType<ICell>[]>([]);
 
   ngOnInit() {
-    cellTypesMap.forEach((el, index) => {
-      this.cellsMapByTypes.push({ typeName: el.typeName, cells: [] });
-      for (let i = 1; i <= el.count; i++) {
-        this.cellsMapByTypes[index].cells.push({
-          state: 'open',
-          numberOfCell: i,
-        });
-      }
-    });
-    console.log(this.cellsMapByTypes);
+  this.cellsMapByTypes$ = this.cellsContentService.getCellsByTypesObservable()
+    setInterval(() => {
+      console.log(this.cellsMapByTypes$)
+    }, 5000)
+
+    // this.cellStateService.cellStateChanged$.subscribe(
+    //   (change: CellStateChange) => {
+    //     if (change.cellId !== undefined) {
+    //       const changedCell = this.findCellById(change.cellId);
+    //       if (changedCell) {
+    //         changedCell.state = change.newState;
+    //       }
+    //     }
+    //   },
+    // );
   }
+
+  // private findCellById(id: number): CellInterface | undefined {
+  //   for (const type of this.cellsMapByTypes$) {
+  //     const foundCell = type.cells.find((cell) => cell.id === id);
+  //     if (foundCell) {
+  //       return foundCell;
+  //     }
+  //   }
+  //   return undefined;
+  // }
 }

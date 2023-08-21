@@ -1,14 +1,15 @@
 export type CellInterface = ISmallCells | IBigCells;
-export type CellType = 'smallCells' | 'bigCells'
+export type CellType = 'smallCells' | 'bigCells';
 
 export interface ICell {
-  numberOfCell?:number;
+  numberOfCell?: number;
   keyCell?: string;
   state?: 'open' | 'close';
   title?: string;
+  id?: number;
 }
 
-export interface IBigCells extends ICell{
+export interface IBigCells extends ICell {
   imageContent?: string;
 }
 
@@ -33,14 +34,14 @@ export class Entity implements IEntity {
   textContent = '';
   imageContent = '';
   title = '';
+  id = 0;
 
   constructor(params?: IEntity) {
-if (params) {
-this.title = params.title || '';
-this.imageContent = params.imageContent || '';
-this.textContent = params.textContent || '';
-}
+    if (params) {
+      this.title = params.title || '';
+      this.imageContent = params.imageContent || '';
+      this.textContent = params.textContent || '';
+      this.id = params.id || 0;
+    }
   }
 }
-
-

@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { KeyGenerateService } from '../../services/key-generate.service';
-import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {ContentModalComponent} from "../content-modal/content-modal.component";
+import {Component} from '@angular/core';
+import {CellsContentService} from "../../services/cells-content.service";
 
 @Component({
   selector: 'app-key-modal',
@@ -9,31 +7,7 @@ import {ContentModalComponent} from "../content-modal/content-modal.component";
   styleUrls: ['./key-modal.component.css'],
 })
 export class KeyModalComponent {
-  private generatedKey: string = '';
-  inputKey: string = '';
-  keyError: boolean = false;
-
-  constructor(
-    private keyGenerateService: KeyGenerateService,
-    private modalService: NgbModal,
-    public modalRef: NgbModalRef,
-    private keyGeneratorService: KeyGenerateService,
-  ) {}
-
-  openModal(content: any) {
-    this.modalRef = this.modalService.open(content);
-    this.keyError = false;
-  }
-
-  confirmKey() {
-    if (this.keyGenerateService.checkKey(this.inputKey)) {
-      this.keyError = false;
-      this.modalRef.dismiss();
-      this.modalService.open(ContentModalComponent);
-
-    } else {
-      this.keyError = true;
-    }
+  constructor(public cellsContentService: CellsContentService) {
   }
 
 

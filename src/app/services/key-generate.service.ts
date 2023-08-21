@@ -12,8 +12,10 @@ export class KeyGenerateService {
       const group = this.generateRandomKey(4);
       groups.push(group);
     }
-    return groups.join(' - ');
 
+    this.generatedKey = groups.join('-').trim();
+
+    return groups.join('-').trim();
   }
 
   private generateRandomKey(length: number): string {
@@ -24,8 +26,6 @@ export class KeyGenerateService {
       const randomIndex = Math.floor(Math.random() * characters.length);
       result += characters.charAt(randomIndex);
     }
-
-    this.generatedKey = result
 
     return result;
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,10 +7,11 @@ import {
 } from '@angular/forms';
 import {
   CellType,
-  Entity,
+  Entity, ICell,
   IEntity,
 } from '../../interfaces/bank-cells.interfaces';
 import { KeyGenerateService } from '../../services/key-generate.service';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-cell-form-modal',
@@ -20,13 +21,14 @@ import { KeyGenerateService } from '../../services/key-generate.service';
 export class CellFormModalComponent implements OnInit {
   @Input() type: CellType = 'smallCells';
   @Input() editableEntity: IEntity = new Entity();
-  @Output() changeData: EventEmitter<IEntity> = new EventEmitter<IEntity>();
 
   public formGroup: FormGroup;
+  private key: ICell = {};
 
   constructor(
     private fb: FormBuilder,
     private keyGenerateService: KeyGenerateService,
+    public activeModal: NgbActiveModal,
   ) {
     this.formGroup = this.fb.group({
       title: [''],
@@ -57,12 +59,13 @@ export class CellFormModalComponent implements OnInit {
   public submitData(): void {
     const data = this.formGroup.getRawValue();
     if (data) {
-      this.changeData.emit(data);
-      this.generateAndStoreKey()
+      this.generateAndStoreKey();
+      this.activeModal.close();
     }
   }
 
   generateAndStoreKey() {
-    this.keyGenerateService.generateFormattedRandomKey();
+    this.key.keyCell = this.keyGenerateService.generateFormattedRandomKey();
+    console.log(this.key.keyCell)
   }
 }
