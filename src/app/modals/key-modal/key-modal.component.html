@@ -4,36 +4,30 @@
     type="button"
     class="close"
     aria-label="Close"
-    (click)="cellsContentService.activeModal.dismiss()"
+    (click)="close()"
   >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <input
-    [(ngModel)]="cellsContentService.inputKey"
+    [(ngModel)]="key"
     class="form-control"
     placeholder="Enter key..."
   />
-  <p
-    *ngIf="cellsContentService.keyError"
-    class="text-danger"
-  >
-    Invalid key, please try again.
-  </p>
 </div>
 <div class="modal-footer">
   <button
     type="button"
     class="btn btn-secondary"
-    (click)="cellsContentService.activeModal.dismiss()"
+    (click)="close()"
   >
     Cancel
   </button>
   <button
     type="button"
     class="btn btn-primary"
-    (click)="cellsContentService.confirmKey()"
+    (click)="submitKey()"
   >
     OK
   </button>

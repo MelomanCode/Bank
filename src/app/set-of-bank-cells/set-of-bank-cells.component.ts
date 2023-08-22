@@ -20,25 +20,7 @@ export class SetOfBankCellsComponent implements OnInit {
       console.log(this.cellsMapByTypes$)
     }, 5000)
 
-    // this.cellStateService.cellStateChanged$.subscribe(
-    //   (change: CellStateChange) => {
-    //     if (change.cellId !== undefined) {
-    //       const changedCell = this.findCellById(change.cellId);
-    //       if (changedCell) {
-    //         changedCell.state = change.newState;
-    //       }
-    //     }
-    //   },
-    // );
   }
 
-  // private findCellById(id: number): CellInterface | undefined {
-  //   for (const type of this.cellsMapByTypes$) {
-  //     const foundCell = type.cells.find((cell) => cell.id === id);
-  //     if (foundCell) {
-  //       return foundCell;
-  //     }
-  //   }
-  //   return undefined;
-  // }
+
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CellInterface, CellType } from '../interfaces/bank-cells.interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CellFormModalComponent } from '../modals/cell-form-modal/cell-form-modal.component';
@@ -13,31 +13,27 @@ export class CellComponent implements OnInit {
   @Input() typeName: CellType = 'smallCells';
   @Input() cell: CellInterface = {};
 
-  cellState: 'open' | 'close' = 'open';
-
-  constructor(
-    private modalService: NgbModal,
-  ) {}
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
+    console.log(this.typeName);
   }
 
-
-
   openModal() {
-    const modalRef = this.modalService.open(CellFormModalComponent, {size: 'xl'});
-    modalRef.componentInstance.editableEntity = this.cell;
+    const modalRef = this.modalService.open(CellFormModalComponent, {
+      size: 'xl',
+    });
+    modalRef.componentInstance.type = this.typeName;
+    modalRef.componentInstance.numberOfCell = this.cell.numberOfCell;
     modalRef.result.then(
-      () => {
-      },
-      () => {}
-      ,
+      () => {},
+      () => {},
     );
-
   }
 
   openKeyModal() {
-    const modalRef = this.modalService.open(KeyModalComponent, {size: 'lg'});
-    modalRef.componentInstance.cellId = this.cell.id;
+    const modalRef = this.modalService.open(KeyModalComponent, { size: 'lg' });
+    modalRef.componentInstance.type = this.typeName;
+    modalRef.componentInstance.numberOfCell = this.cell.numberOfCell;
   }
 }

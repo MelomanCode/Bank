@@ -1,17 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  CellType,
-  Entity, ICell,
-  IEntity,
-} from '../../interfaces/bank-cells.interfaces';
-import { KeyGenerateService } from '../../services/key-generate.service';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { CellType, IEntity } from '../../interfaces/bank-cells.interfaces';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CellsContentService } from '../../services/cells-content.service';
 
 @Component({
   selector: 'app-cell-form-modal',
@@ -20,14 +16,14 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class CellFormModalComponent implements OnInit {
   @Input() type: CellType = 'smallCells';
-  @Input() editableEntity: IEntity = new Entity();
+  @Input() numberOfCell: number = 0;
 
   public formGroup: FormGroup;
-  private key: ICell = {};
 
   constructor(
     private fb: FormBuilder,
-    private keyGenerateService: KeyGenerateService,
+    private cellsContentService: CellsContentService,
+    private modalService: NgbModal,
     public activeModal: NgbActiveModal,
   ) {
     this.formGroup = this.fb.group({
@@ -47,9 +43,6 @@ export class CellFormModalComponent implements OnInit {
         new FormControl('', Validators.required),
       );
     }
-    if (this.editableEntity) {
-      this.formGroup.patchValue(this.editableEntity);
-    }
   }
 
   public getIsAccessControl(controlName: string): boolean {
@@ -57,15 +50,25 @@ export class CellFormModalComponent implements OnInit {
   }
 
   public submitData(): void {
-    const data = this.formGroup.getRawValue();
+    const data: IEntity = this.formGroup.getRawValue();
     if (data) {
-      this.generateAndStoreKey();
       this.activeModal.close();
+      const key = this.cellsContentService.updateCellState(
+        this.type,
+        this.numberOfCell,
+        {
+          textContent: data.textContent,
+          imageContent: data.imageContent,
+          title: data.title,
+        },
+      );
+      if (key !== '0') {
+        this.openModalWithKey(key);
+      }
     }
   }
 
-  generateAndStoreKey() {
-    this.key.keyCell = this.keyGenerateService.generateFormattedRandomKey();
-    console.log(this.key.keyCell)
+  openModalWithKey(key: string) {
+    this.modalService.open('Ваш ключ доступа:' + ' ' +  key, { size: 'lg' });
   }
 }

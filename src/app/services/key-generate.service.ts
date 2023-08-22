@@ -34,7 +34,4 @@ export class KeyGenerateService {
     return this.generatedKey;
   }
 
-  checkKey(key: string): boolean {
-    return key === this.generatedKey;
-  }
 }
