@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CellInterface, CellType } from '../interfaces/bank-cells.interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CellFormModalComponent } from '../modals/cell-form-modal/cell-form-modal.component';
@@ -9,15 +9,11 @@ import { KeyModalComponent } from '../modals/key-modal/key-modal.component';
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.css'],
 })
-export class CellComponent implements OnInit {
+export class CellComponent {
   @Input() typeName: CellType = 'smallCells';
   @Input() cell: CellInterface = {};
 
   constructor(private modalService: NgbModal) {}
-
-  ngOnInit() {
-    console.log(this.typeName);
-  }
 
   openModal() {
     const modalRef = this.modalService.open(CellFormModalComponent, {

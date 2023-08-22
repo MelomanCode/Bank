@@ -1,6 +1,16 @@
 .cells-box {
   display: flex;
   flex-wrap: wrap;
+  padding: 15px 25px 15px 25px;
+
+}
+.body-set {
+  background-color: #0e0d0d;
+  flex-direction: column;
 }
 
-
+.button-bank {
+  margin: 15px 0 20px 35px;
+  color: #c7c7c7;
+  background-color: #002c1c;
+}

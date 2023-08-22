@@ -4,7 +4,8 @@
     'big-cell': typeName === 'bigCells'
   }"
   [ngStyle]="{
-    'border-color': cell.state === 'open' ? '#59f559' : 'red'
+    'border-color': cell.state === 'open' ? '#59f559' : 'red',
+    'background-color': cell.state === 'open' ? '#8ed50d' : '#b90000'
   }"
 
   (click)="cell.state === 'open' ? openModal() : openKeyModal()"

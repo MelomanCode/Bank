@@ -2,6 +2,10 @@
   <h3 class="title">{{ editableEntity.title }}</h3>
   <div class="content">
     <p *ngIf="type === 'smallCells'">{{ editableEntity.textContent }}</p>
-    <img *ngIf="type === 'bigCells'" [alt]="editableEntity.imageContent" [src]="editableEntity.imageContent">
+    <img class="image-content"
+      *ngIf="type === 'bigCells'"
+      [alt]="editableEntity.imageContent"
+      [src]="editableEntity.imageContent"
+    />
   </div>
 </div>

@@ -1,12 +1,16 @@
+<div class="body-set">
 <div
   class="cells-box"
   *ngFor="let cellsList of cellsMapByTypes$ | async"
 >
-  <ng-container *ngFor="let cell of cellsList.cells">
+  <ng-container *ngFor="let cell of cellsList.cells" class="cells">
     <app-cell
       [typeName]="cellsList.typeName"
       [cell]="cell"
     >
     </app-cell>
   </ng-container>
+
+</div>
+<button class="button-bank" (click)="openBankKeyModal()">Bank of cells key</button>
 </div>

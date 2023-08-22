@@ -8,6 +8,7 @@ import {
 import { cellTypesMap } from '../constance';
 import { BehaviorSubject } from 'rxjs';
 import { KeyGenerateService } from './key-generate.service';
+import {FindListKeyService} from "./find-list-key.service";
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class CellsContentService {
   private cellsMapByTypes$ = new BehaviorSubject<ICellsByType<ICell>[]>([]);
 
   constructor(
-    private keyGenerateService: KeyGenerateService,
+    private keyGenerateService: KeyGenerateService, private findListKeyService: FindListKeyService
   ) {
     cellTypesMap.forEach((el, index) => {
       this.cellsMapByTypes.push({ typeName: el.typeName, cells: [] });
@@ -56,9 +57,11 @@ export class CellsContentService {
       foundCell.imageContent = content.imageContent;
       foundCell.title = content.title;
       foundCell.keyCell = this.keyGenerateService.generateFormattedRandomKey();
+      this.findListKeyService.addKey(foundCell.keyCell)
       foundCell.state = 'close';
       this.updateList();
       return foundCell.keyCell;
+
     } else {
       return '0';
     }
@@ -74,6 +77,7 @@ export class CellsContentService {
     if (foundCell) {
       if (foundCell.keyCell === keyCell.trim()) {
         foundCell.state = 'open';
+        this.findListKeyService.deleteKey(foundCell.keyCell)
         this.updateList();
         return {
           imageContent: foundCell.imageContent,

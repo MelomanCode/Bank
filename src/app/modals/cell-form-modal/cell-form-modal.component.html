@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" class="modal-body">
   <ng-container *ngIf="getIsAccessControl('title')">
     <div class="mb-3">
       <label
@@ -59,7 +59,7 @@
   <button
     (click)="submitData()"
     [disabled]="formGroup.invalid"
-    class="btn btn-primary"
+    class="btn-submit"
     type="submit"
   >
     Submit

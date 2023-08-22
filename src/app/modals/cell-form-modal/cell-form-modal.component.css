@@ -1,3 +1,28 @@
+.modal-body {
+  background-color: #a8e1d5;
+  padding: 10px 30px 10px 30px;
+}
+
+.btn-submit {
+  border: 1px solid #ff0000;
+  height: 40px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background-color: #c45c5c;
+  color: #fafafa;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.btn-submit:hover {
+background-color: #0c9f0c;
+  color: #fafafa;
+  border: 1px solid #06ff00;
+}
+
 .flex-control {
   display: flex;
   flex-direction: row;

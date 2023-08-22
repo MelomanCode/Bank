@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import {CellsContentService} from "../services/cells-content.service";
-import {BehaviorSubject} from "rxjs";
-import {ICell, ICellsByType} from "../interfaces/bank-cells.interfaces";
+import { CellsContentService } from '../services/cells-content.service';
+import { BehaviorSubject } from 'rxjs';
+import {
+  CellType,
+  ICell,
+  ICellsByType,
+} from '../interfaces/bank-cells.interfaces';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BankOfKeyModalComponent } from '../modals/bank-of-key-modal/bank-of-key-modal.component';
 
 @Component({
   selector: 'app-set-of-bank-cells',
@@ -10,17 +16,21 @@ import {ICell, ICellsByType} from "../interfaces/bank-cells.interfaces";
   styleUrls: ['./set-of-bank-cells.component.css'],
 })
 export class SetOfBankCellsComponent implements OnInit {
-  constructor( private cellsContentService: CellsContentService) {}
+  @Input() type: CellType = 'smallCells';
+  @Input() numberOfCell: number = 0;
+  constructor(
+    private cellsContentService: CellsContentService,
+    private modalService: NgbModal,
+  ) {}
 
   public cellsMapByTypes$ = new BehaviorSubject<ICellsByType<ICell>[]>([]);
 
   ngOnInit() {
-  this.cellsMapByTypes$ = this.cellsContentService.getCellsByTypesObservable()
-    setInterval(() => {
-      console.log(this.cellsMapByTypes$)
-    }, 5000)
-
+    this.cellsMapByTypes$ =
+      this.cellsContentService.getCellsByTypesObservable();
   }
 
-
+  openBankKeyModal() {
+    this.modalService.open(BankOfKeyModalComponent, { size: 'xl' });
+  }
 }

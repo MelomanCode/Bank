@@ -9,6 +9,7 @@ import { CellFormModalComponent } from './modals/cell-form-modal/cell-form-modal
 import {KeyModalComponent} from "./modals/key-modal/key-modal.component";
 import {ContentModalComponent} from "./modals/content-modal/content-modal.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {BankOfKeyModalComponent} from "./modals/bank-of-key-modal/bank-of-key-modal.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CellFormModalComponent,
     KeyModalComponent,
     ContentModalComponent,
+    BankOfKeyModalComponent
   ],
   imports: [BrowserModule, NgbModule, ReactiveFormsModule, FormsModule],
   providers: [NgbActiveModal],
